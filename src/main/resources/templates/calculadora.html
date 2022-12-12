@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<form class="form-horizontal" action="#" method="POST" th:action="@{/operacionSubmit}"
+		th:object="calc"	>
+	<fieldset>
+	
+	<!-- Form Name -->
+	<legend>Operacion</legend>
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="NumA">Number A</label>  
+	  <div class="col-md-4">
+	  <input id="NumA" name="NumA" th:field="*{numA}" type="number" placeholder="" class="form-control input-md" required="">
+	    
+	  </div>
+	</div>
+	
+	<!-- Text input-->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="numB">Number B</label>  
+	  <div class="col-md-4">
+	  <input id="numB" name="numB" th:field="*{numB}" type="number" placeholder="" class="form-control input-md">
+	    
+	  </div>
+	</div>
+	
+	<!-- Select Basic -->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="operacion">Select Basic</label>
+	  <div class="col-md-4">
+	    <select id="operacion" name="operacion" class="form-control">
+	      <option value="+">+</option>
+	      <option value="-">-</option>
+	      <option value="/">/</option>
+	      <option value="*">*</option>
+	    </select>
+	  </div>
+	</div>
+	
+	<!-- Button -->
+	<div class="form-group">
+	  <label class="col-md-4 control-label" for="singlebutton">Single Button</label>
+	  <div class="col-md-4">
+	    <button id="singlebutton" name="singlebutton" class="btn btn-primary">Button</button>
+	  </div>
+	</div>
+	
+	</fieldset>
+	</form>
+	
+	
+
+</body>
+</html>
