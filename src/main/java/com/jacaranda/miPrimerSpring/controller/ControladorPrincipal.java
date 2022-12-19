@@ -34,7 +34,6 @@ public class ControladorPrincipal {
 	public String operacionSubmit (Model model , @ModelAttribute("calc") Calculator calculadora) {
 		
 		
-		//model.addAttribute("calc",calc);
 		return "calculadora";
 	}
 	

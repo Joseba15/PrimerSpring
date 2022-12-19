@@ -27,13 +27,17 @@
     				</tr>
     			</thead>
 				<tbody>
-    				<tr th:each="student :${lista}">
+    				<tr th:each="student: ${lista}">
     					<td th:text="${student.name}"></td>
-    					<td th:text="${student.surname}"></td>
+    					<td th:text="${student.surname}"></td> 
     					<td th:text="${student.age}"></td>
     					<td>
-    					<form class="form-horizontal" method="POST" th:action="@{/delStudent/" 
-							th:object="${estudiante}"></form>
+    						<label class="col-md-4 control-label" for="singlebutton"></label>
+    						<a  th:href="@{'/delStudent'(name=${student.name},surname=$={student.surname})" 
+							th:object="${student}"><button id="singlebutton" name="singlebutton" class="btn btn-primary">Eliminar</button></a>
+							
+							<a  th:href="@{'/delStudent'(name=${student.name},surname=$={student.surname})" 
+							th:object="${student}"><button id="singlebutton" name="singlebutton" class="btn btn-primary">Eliminar</button></a>
     					</td>
     				</tr>
     			</tbody>

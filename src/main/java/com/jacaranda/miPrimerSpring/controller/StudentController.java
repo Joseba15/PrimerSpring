@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jacaranda.miPrimerSpring.model.Calculator;
 import com.jacaranda.miPrimerSpring.model.Student;
@@ -20,7 +21,7 @@ public class StudentController {
 	//LISTAR ESTUDIANTES
 	@GetMapping("listStudent")
 	public String listStudent(Model model) {
-		model.addAttribute("lista", repositorio.getLista());
+		model.addAttribute("lista", repositorio.getLista() );
 		return "listStudent";
 	}
 	
@@ -29,18 +30,19 @@ public class StudentController {
 	
 	//BORRAR ESTUDIANTE 
 	@GetMapping("delStudent")
-	public String delStudent(Model model,@ModelAttribute("student") Student pepito) {
+	public String delStudent(Model model,@RequestParam(name="name") String name,
+							@RequestParam(name="surname") String surname) {
 		
-		//model.addAttribute("estudiante",student);
+		Student estudiante = repositorio.getStudent(name, surname);
+		model.addAttribute("estudiante",estudiante);
 		
-		return "addStudent";
+		return "delStudent";
 	}
 	
 	@PostMapping("/delStudent/submit")
 	public String delSubmitStudent ( @ModelAttribute("estudiante") Student pepito) {
-		repositorio.addStudent(pepito);
+		repositorio.remove(pepito);
 		
-		//model.addAttribute("calc",calc);
 		return "redirect:/listStudent";
 	}
 	
@@ -63,8 +65,27 @@ public class StudentController {
 	public String addSubmitSubmit	 ( @ModelAttribute("estudiante") Student pepito) {
 		repositorio.addStudent(pepito);
 		
-		//model.addAttribute("calc",calc);
 		return "redirect:/listStudent";
+	}
+	
+	
+	//EDITAR ESTUDIANTE 
+	@GetMapping("/editStudent")
+	public String editStudent(Model model, @RequestParam(name="name", required=false, defaultValue="")String name,
+			@RequestParam(name="surname", required=false, defaultValue="")String surname) {
+		
+		Student estudiante = repositorio.getStudent(name, surname);
+		model.addAttribute("student", estudiante);
+		
+		return "editStudent";
+	}
+	
+	@PostMapping("/editStudent/Submit")
+	public String listStudentseditMethod ( @ModelAttribute("student") Student student) {
+		
+		repositorio.updateStudent(student.getName(), student.getSurname(), student.getAge());
+			
+		return "redirect:/listStudents";
 	}
 	
 }

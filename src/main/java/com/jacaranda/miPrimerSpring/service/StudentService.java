@@ -57,21 +57,21 @@ public class StudentService {
 				
 	}
 
-//	public Student updateStudent(String nombre, String apellidos) {
-//		boolean encontrado = false;
-//		Student res=null;
-//		
-//		Iterator<Student> iterator = this.lista.iterator();
-//		while(iterator.hasNext() && !encontrado)
-//				res = iterator.next();
-//				if (res.getName().equals(nombre) && res.getSurname().equals(apellidos)) {
-//					encontrado=true;
-//					
-//				}
-//				
-//				
-//				
-//	}
+	public Student updateStudent(String nombre, String apellidos,int edad) {
+		boolean encontrado = false;
+		Student res=null;
+		
+		Iterator<Student> iterator = this.lista.iterator();
+		while(iterator.hasNext() && !encontrado)
+				res = iterator.next();
+				if (res.getName().equals(nombre) && res.getSurname().equals(apellidos)) {
+					encontrado=true;
+					res.setAge(edad);
+					
+				}
+				
+				return res;			
+	}
 
 
 	public List<Student> getLista() {
