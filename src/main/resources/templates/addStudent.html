@@ -38,12 +38,14 @@
 	
 	
 	<!-- Text input-->
-	<div class="form-group">
+	<div class="form-group" th:classapend="${#fields.hasErrors('age')} ? 'has-error'">
 	  <label class="col-md-4 control-label" for="edad">Age</label>  
 	  <div class="col-md-4">
-	    
+		  <input id="edad" th:form="*{age}" name="edad" type="text" placeholder="age" class="form-control input-md">
+	      <span class="help-block">help</span>
+	      <span th:if="${#fields.hasErrors('age')}" th:errors="*{age}"
+		class="help-block" id="id-error">Errores</span>
 	  </div>
-	  <input id="edad" th:form="*{age}" name="edad" type="text" placeholder="age" class="form-control input-md">
 	</div>
 	
 	

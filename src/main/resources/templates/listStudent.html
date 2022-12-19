@@ -22,7 +22,7 @@
     					<th>NOMBRE</th>
     					<th>APELLIDO</th>
     					<th>EDAD</th>
-    					<th><a href="addStudent.html"><img src="../static/images/add.png" min="25" max="25"></a></th>
+    					<th><a th:href="@{'/addStudent'}">Add student </a></th>
     					
     				</tr>
     			</thead>
@@ -33,11 +33,10 @@
     					<td th:text="${student.age}"></td>
     					<td>
     						<label class="col-md-4 control-label" for="singlebutton"></label>
-    						<a  th:href="@{'/delStudent'(name=${student.name},surname=$={student.surname})" 
-							th:object="${student}"><button id="singlebutton" name="singlebutton" class="btn btn-primary">Eliminar</button></a>
+    						<a  th:href="@{'/delStudent'(name=${student.name},surname=${student.surname})}" 
+							><button id="singlebutton" name="singlebutton" class="btn btn-primary">Eliminar</button></a>
 							
-							<a  th:href="@{'/delStudent'(name=${student.name},surname=$={student.surname})" 
-							th:object="${student}"><button id="singlebutton" name="singlebutton" class="btn btn-primary">Eliminar</button></a>
+						
     					</td>
     				</tr>
     			</tbody>

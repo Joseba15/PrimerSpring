@@ -3,6 +3,8 @@ package com.jacaranda.miPrimerSpring.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,7 +21,7 @@ public class StudentController {
 	StudentService repositorio;
 	
 	//LISTAR ESTUDIANTES
-	@GetMapping("listStudent")
+	@GetMapping({"listStudent","/"})
 	public String listStudent(Model model) {
 		model.addAttribute("lista", repositorio.getLista() );
 		return "listStudent";
@@ -62,10 +64,14 @@ public class StudentController {
 	
 
 	@PostMapping("/addStudent/submit")
-	public String addSubmitSubmit	 ( @ModelAttribute("estudiante") Student pepito) {
-		repositorio.addStudent(pepito);
-		
-		return "redirect:/listStudent";
+	public String addSubmitSubmit(@Validated @ModelAttribute("estudiante") Student pepito,BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+				return "addStudents";
+			}else {
+				repositorio.addStudent(pepito);
+				
+				return "redirect:/listStudent";
+			}
 	}
 	
 	
@@ -87,5 +93,21 @@ public class StudentController {
 			
 		return "redirect:/listStudents";
 	}
+	
+	
+	
+	
+	
+	
+	//EDITAR ESTUDIANTE 
+		@GetMapping("/login")
+		public String login(Model model, @RequestParam(name="name", required=false, defaultValue="")String name,
+				@RequestParam(name="surname", required=false, defaultValue="")String surname) {
+			
+			Student estudiante = repositorio.getStudent(name, surname);
+			model.addAttribute("student", estudiante);
+			
+			return "editStudent";
+		}
 	
 }
